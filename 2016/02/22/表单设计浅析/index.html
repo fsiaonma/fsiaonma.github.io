@@ -1,100 +1,88 @@
-<!DOCTYPE html>
-<html>
+
+ <!DOCTYPE HTML>
+<html >
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>表单设计浅析 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="近日读了《Web表单设计_点石成金的艺术》这本书，更多的从用户心理进行切入，分析表单的设计各个注意事项，体会很多，写下这篇笔记记录一些重点内容，同时希望能在真实使用中注意这些细节。
-背景我们必须知道，现实生活中大多数人讨厌表单，在流程中最容易丢失用户的环节。因此，基于这个背景，表单设计的目标貌似变得简单，就是让用户“填完”。
-注意事项至于如何能够让用户实现填完的目标，可能需要注意以下几点：
-
-尽量">
-<meta property="og:type" content="article">
-<meta property="og:title" content="表单设计浅析">
-<meta property="og:url" content="http://yoursite.com/2016/02/22/表单设计浅析/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="近日读了《Web表单设计_点石成金的艺术》这本书，更多的从用户心理进行切入，分析表单的设计各个注意事项，体会很多，写下这篇笔记记录一些重点内容，同时希望能在真实使用中注意这些细节。
-背景我们必须知道，现实生活中大多数人讨厌表单，在流程中最容易丢失用户的环节。因此，基于这个背景，表单设计的目标貌似变得简单，就是让用户“填完”。
-注意事项至于如何能够让用户实现填完的目标，可能需要注意以下几点：
-
-尽量">
-<meta property="og:updated_time" content="2016-02-22T14:42:40.819Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="表单设计浅析">
-<meta name="twitter:description" content="近日读了《Web表单设计_点石成金的艺术》这本书，更多的从用户心理进行切入，分析表单的设计各个注意事项，体会很多，写下这篇笔记记录一些重点内容，同时希望能在真实使用中注意这些细节。
-背景我们必须知道，现实生活中大多数人讨厌表单，在流程中最容易丢失用户的环节。因此，基于这个背景，表单设计的目标貌似变得简单，就是让用户“填完”。
-注意事项至于如何能够让用户实现填完的目标，可能需要注意以下几点：
-
-尽量">
-  
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  
-
+    <title>表单设计浅析 | Fsiaonma&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="近日读了《Web表单设计_点石成金的艺术》这本书，更多的从用户心理进行切入，分析表单的设计各个注意事项，体会很多，写下这篇笔记记录一些重点内容，同时希望能在真实使用中注意这些细节。
+背景我们必须知道，现实生活中大多数人讨厌表单，在流程中最容易丢失用户的环节。因此，基于这个背景，表单设计的目标貌似变得">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-表单设计浅析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/22/表单设计浅析/" class="article-date">
-  <time datetime="2016-02-22T14:42:30.000Z" itemprop="datePublished">2016-02-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      表单设计浅析
-    </h1>
-  
 
-      </header>
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Fsiaonma&#39;s Blog">Fsiaonma&#39;s Blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>近日读了《Web表单设计_点石成金的艺术》这本书，更多的从用户心理进行切入，分析表单的设计各个注意事项，体会很多，写下这篇笔记记录一些重点内容，同时希望能在真实使用中注意这些细节。</p>
+      <a href="/2016/02/22/表单设计浅析/" title="表单设计浅析" itemprop="url">表单设计浅析</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-02-22T14:42:30.000Z" itemprop="datePublished">2016-02-22</time>
+    更新日期:<time datetime="2016-02-22T14:42:40.819Z" itemprop="dateModified">2016-02-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意事项"><span class="toc-number">2.</span> <span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#组织表单"><span class="toc-number">2.1.</span> <span class="toc-text">组织表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选取问题"><span class="toc-number">2.1.1.</span> <span class="toc-text">选取问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建对话"><span class="toc-number">2.1.2.</span> <span class="toc-text">构建对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内容组织"><span class="toc-number">2.1.3.</span> <span class="toc-text">内容组织</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成之路"><span class="toc-number">2.2.</span> <span class="toc-text">完成之路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表单命名"><span class="toc-number">2.2.1.</span> <span class="toc-text">表单命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清晰的浏览线"><span class="toc-number">2.2.2.</span> <span class="toc-text">清晰的浏览线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分散注意力最少"><span class="toc-number">2.2.3.</span> <span class="toc-text">分散注意力最少</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表单元素布局"><span class="toc-number">3.</span> <span class="toc-text">表单元素布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-number">3.1.</span> <span class="toc-text">标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顶对齐"><span class="toc-number">3.1.1.</span> <span class="toc-text">顶对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#左对齐"><span class="toc-number">3.1.2.</span> <span class="toc-text">左对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#右对齐"><span class="toc-number">3.1.3.</span> <span class="toc-text">右对齐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入框"><span class="toc-number">3.2.</span> <span class="toc-text">输入框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动作"><span class="toc-number">3.3.</span> <span class="toc-text">动作</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>近日读了《Web表单设计_点石成金的艺术》这本书，更多的从用户心理进行切入，分析表单的设计各个注意事项，体会很多，写下这篇笔记记录一些重点内容，同时希望能在真实使用中注意这些细节。</p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>我们必须知道，现实生活中大多数人讨厌表单，在流程中最容易丢失用户的环节。因此，基于这个背景，表单设计的目标貌似变得简单，就是让用户“填完”。</p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>至于如何能够让用户实现填完的目标，可能需要注意以下几点：</p>
 <ul>
@@ -126,120 +114,208 @@
 <p><strong>因此，如果需要用户库快速完成表单填写，可以选用顶对齐方式，如果需要用户缓慢填写，并清晰知道表单内容，可选择左对齐方式。</strong></p>
 <h2 id="输入框"><a href="#输入框" class="headerlink" title="输入框"></a>输入框</h2><p>输入框有暗示答案的功能，正如：门上有把手，暗示着大家门能开，门上有“推”字样，告诉大家如何开。输入框的长度就能暗示答案长度，而 placeholder 属性将告诉大家如何填写答案。</p>
 <h2 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h2><p>动作分为2种<br>主动作，如提交，保存<br>次动作，如重置，取消<br>应尽量减少次动作。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/22/表单设计浅析/" data-id="ciky3fejt0001ioa0yc9rymv4" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
+
+
+
+<div class="article-share" id="share">
+
   
+<div class="jiathis_style">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_tsina">新浪微博</a>
+    <a class="jiathis_button_weixin">微信</a>
+    <a class="jiathis_button_twitter">Twitter</a>
+    <a class="jiathis_button_evernote">EverNote</a>
+    <a href="http://www.jiathis.com/share?uid=1501277" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
     
-<nav id="article-nav">
-  
-    <a href="/2016/02/22/前后端分离实践/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          前后端分离实践
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/02/22/前端-UI-分离方案/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">《杭JS》会议 &amp; 前端 UI 分离方案</div>
-    </a>
-  
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/02/22/前后端分离实践/" title="前后端分离实践">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  前后端分离实践</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/22/前端-UI-分离方案/"  title="《杭JS》会议 &amp; 前端 UI 分离方案">
+ <strong>NEXT:</strong><br/> 
+ <span>《杭JS》会议 &amp; 前端 UI 分离方案
+</span>
+</a>
+</div>
+
 </nav>
 
-  
-</article>
-
+	
+<section class="comment">
+	<div class="ds-thread"></div>
 </section>
-        
-          <aside id="sidebar">
-  
-    
-  
-    
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">6</span></li></ul>
-    </div>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意事项"><span class="toc-number">2.</span> <span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#组织表单"><span class="toc-number">2.1.</span> <span class="toc-text">组织表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选取问题"><span class="toc-number">2.1.1.</span> <span class="toc-text">选取问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建对话"><span class="toc-number">2.1.2.</span> <span class="toc-text">构建对话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内容组织"><span class="toc-number">2.1.3.</span> <span class="toc-text">内容组织</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成之路"><span class="toc-number">2.2.</span> <span class="toc-text">完成之路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表单命名"><span class="toc-number">2.2.1.</span> <span class="toc-text">表单命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清晰的浏览线"><span class="toc-number">2.2.2.</span> <span class="toc-text">清晰的浏览线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分散注意力最少"><span class="toc-number">2.2.3.</span> <span class="toc-text">分散注意力最少</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表单元素布局"><span class="toc-number">3.</span> <span class="toc-text">表单元素布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-number">3.1.</span> <span class="toc-text">标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顶对齐"><span class="toc-number">3.1.1.</span> <span class="toc-text">顶对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#左对齐"><span class="toc-number">3.1.2.</span> <span class="toc-text">左对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#右对齐"><span class="toc-number">3.1.3.</span> <span class="toc-text">右对齐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入框"><span class="toc-number">3.2.</span> <span class="toc-text">输入框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动作"><span class="toc-number">3.3.</span> <span class="toc-text">动作</span></a></li></ol></li></ol>
   </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/02/22/前后端分离实践/">前后端分离实践</a>
-          </li>
-        
-          <li>
-            <a href="/2016/02/22/表单设计浅析/">表单设计浅析</a>
-          </li>
-        
-          <li>
-            <a href="/2016/02/22/前端-UI-分离方案/">《杭JS》会议 &amp; 前端 UI 分离方案</a>
-          </li>
-        
-          <li>
-            <a href="/2016/02/22/cocos2d-js-制作-2048/">cocos2d-js 制作 2048</a>
-          </li>
-        
-          <li>
-            <a href="/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/">PSD解析工具 “Psdium-Views” 制作规划</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
 
   
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+</div>
     </div>
-  </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
-<script src="/js/script.js" type="text/javascript"></script>
 
-  </div>
-</body>
+
+
+  </body>
 </html>
