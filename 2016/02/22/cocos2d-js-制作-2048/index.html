@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>cocos2d-js 制作 2048 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于已经长时间没有使用 cocos2d-js 开发，再加上 cocos2d-js 已从当初的 alpha2 迭代到现在的 3.0，许多接口都有颠覆性的改变，要从新熟悉 cocos2d-js 必须自我制作一款简单的游戏作为实践。
+步骤一：前期准备工作。（包括：下载 cocos2d-js 源码，准备好 api 文档，准备好教程用例），源码可以从 github 上下载，项目里头包括了相关的 api 文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2d-js 制作 2048">
+<meta property="og:url" content="http://yoursite.com/2016/02/22/cocos2d-js-制作-2048/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="由于已经长时间没有使用 cocos2d-js 开发，再加上 cocos2d-js 已从当初的 alpha2 迭代到现在的 3.0，许多接口都有颠覆性的改变，要从新熟悉 cocos2d-js 必须自我制作一款简单的游戏作为实践。
+步骤一：前期准备工作。（包括：下载 cocos2d-js 源码，准备好 api 文档，准备好教程用例），源码可以从 github 上下载，项目里头包括了相关的 api 文档">
+<meta property="og:updated_time" content="2016-02-22T14:41:36.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cocos2d-js 制作 2048">
+<meta name="twitter:description" content="由于已经长时间没有使用 cocos2d-js 开发，再加上 cocos2d-js 已从当初的 alpha2 迭代到现在的 3.0，许多接口都有颠覆性的改变，要从新熟悉 cocos2d-js 必须自我制作一款简单的游戏作为实践。
+步骤一：前期准备工作。（包括：下载 cocos2d-js 源码，准备好 api 文档，准备好教程用例），源码可以从 github 上下载，项目里头包括了相关的 api 文档">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cocos2d-js-制作-2048" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/22/cocos2d-js-制作-2048/" class="article-date">
+  <time datetime="2016-02-22T14:41:33.000Z" itemprop="datePublished">2016-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cocos2d-js 制作 2048
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于已经长时间没有使用 cocos2d-js 开发，再加上 cocos2d-js 已从当初的 alpha2 迭代到现在的 3.0，许多接口都有颠覆性的改变，要从新熟悉 cocos2d-js 必须自我制作一款简单的游戏作为实践。</p>
+<h3 id="步骤一："><a href="#步骤一：" class="headerlink" title="步骤一："></a>步骤一：</h3><p>前期准备工作。（包括：下载 cocos2d-js 源码，准备好 api 文档，准备好教程用例），源码可以从 github 上下载，项目里头包括了相关的 api 文档，同时项目里也拥有了教程用例，前期算是非常的顺利。</p>
+<h3 id="步骤二："><a href="#步骤二：" class="headerlink" title="步骤二："></a>步骤二：</h3><p>搭建 2048 项目。接住 cocos2d-js 线上的星球大战作为基础，可以搭建出一个基本的游戏框架。删除多余文件，以及资源，可以开始编码开发。</p>
+<h3 id="步骤三："><a href="#步骤三：" class="headerlink" title="步骤三："></a>步骤三：</h3><p>需求分析。《2048》是一款碎石类游戏，通过合并相同数字的方块，最终组合成 2048。每一次移动同时会随即生成一个 2 或 4 的方块。</p>
+<h3 id="步骤四："><a href="#步骤四：" class="headerlink" title="步骤四："></a>步骤四：</h3><p>技术预研究。需要生成多个layer层，在每个layer层上配置数字信息。通过键盘控制方块移动。过程中要了解 layer 的生成，文字的生成，坐标世界观，动画播放，键盘事件绑定等。</p>
+<h3 id="步骤五："><a href="#步骤五：" class="headerlink" title="步骤五："></a>步骤五：</h3><p>逻辑编写。整个工程需要有2个主要类，</p>
+<ul>
+<li>一个为游戏场景，</li>
+<li><p>一个为方块类。<br>在过程中，首先要渲染出底层最主要的游戏场景。其次，分步骤按逻辑生成带有数字的方块，并根据玩家操作，将方块进行合并。</p>
+</li>
+<li><p>一个对象数组，每项里面记录每个方块的位置，当前是否已经被有方块，以及方块对象。</p>
+</li>
+<li>一个适配对象，记录每个数字类型的字体颜色，以及方块背景颜色，方便生成方块。             * 一套生成方块的算法，算法的原则是，在空白处生成2或4的方块。</li>
+<li>每次移动过程后，记录下全局的所有空白格子，并且随机在这些格子上生成方块。<pre><code>* 一套判断移动算法:该算法是一套递归过程，每个方格移动的时候需要判断2种情况：
+     * 如果该方向上有其他方块，我要知道该方块最终能移动到的位置。
+     * 如果该方向上无其他方块，则将当前方块移动到棋盘边界。
+* 一套检测合并的算法。
+      * 每次移动操作过后，遍历全局，开是否有重复的方块出现在同一个格子出，如果有，则移除其中一个方块，并将另外一块方块的数值乘以2。
+</code></pre></li>
+<li>编写键盘回调，这个过程需要找出，键盘上每个键对应的键码，测试后得出，上：38，左：37，下：40，右：39。</li>
+</ul>
+<p>项目地址：<a href="https://github.com/fsiaonma/2048" target="_blank" rel="external">https://github.com/fsiaonma/2048</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/22/cocos2d-js-制作-2048/" data-id="ciky3fek80005ioa01xh1nbv0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/22/前端-UI-分离方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          《杭JS》会议 &amp; 前端 UI 分离方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PSD解析工具 “Psdium-Views” 制作规划</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/02/22/前后端分离实践/">前后端分离实践</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/表单设计浅析/">表单设计浅析</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/前端-UI-分离方案/">《杭JS》会议 &amp; 前端 UI 分离方案</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/cocos2d-js-制作-2048/">cocos2d-js 制作 2048</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/">PSD解析工具 “Psdium-Views” 制作规划</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

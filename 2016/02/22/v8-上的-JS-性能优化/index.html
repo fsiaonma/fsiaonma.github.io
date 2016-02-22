@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>v8 上的 JS 性能优化 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这次到北京的主要目的，主要在于参加由 JSConf 组织主办的《京JS》会议，去年同期该组织也曾经举办过《沪JS》，会议主要内容为 《前端js的相关优化》 以及 《nodejs服务器端的相关技术分享》。
+这次会议的收获主要归结为以下几点：
+一场专注于 JavaScript 和 Node.js 的技术会议。
+开发者对 nodejs 的使用频率成大幅上升。
+各大公司对 nodejs 的投入力度加大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="v8 上的 JS 性能优化">
+<meta property="og:url" content="http://yoursite.com/2016/02/22/v8-上的-JS-性能优化/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这次到北京的主要目的，主要在于参加由 JSConf 组织主办的《京JS》会议，去年同期该组织也曾经举办过《沪JS》，会议主要内容为 《前端js的相关优化》 以及 《nodejs服务器端的相关技术分享》。
+这次会议的收获主要归结为以下几点：
+一场专注于 JavaScript 和 Node.js 的技术会议。
+开发者对 nodejs 的使用频率成大幅上升。
+各大公司对 nodejs 的投入力度加大。">
+<meta property="og:updated_time" content="2016-02-22T14:38:50.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="v8 上的 JS 性能优化">
+<meta name="twitter:description" content="这次到北京的主要目的，主要在于参加由 JSConf 组织主办的《京JS》会议，去年同期该组织也曾经举办过《沪JS》，会议主要内容为 《前端js的相关优化》 以及 《nodejs服务器端的相关技术分享》。
+这次会议的收获主要归结为以下几点：
+一场专注于 JavaScript 和 Node.js 的技术会议。
+开发者对 nodejs 的使用频率成大幅上升。
+各大公司对 nodejs 的投入力度加大。">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-v8-上的-JS-性能优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/22/v8-上的-JS-性能优化/" class="article-date">
+  <time datetime="2016-02-22T14:38:42.000Z" itemprop="datePublished">2016-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      v8 上的 JS 性能优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这次到北京的主要目的，主要在于参加由 JSConf 组织主办的《京JS》会议，去年同期该组织也曾经举办过《沪JS》，会议主要内容为 《前端js的相关优化》 以及 《nodejs服务器端的相关技术分享》。</p>
+<h2 id="这次会议的收获主要归结为以下几点："><a href="#这次会议的收获主要归结为以下几点：" class="headerlink" title="这次会议的收获主要归结为以下几点："></a>这次会议的收获主要归结为以下几点：</h2><ol>
+<li>一场专注于 JavaScript 和 Node.js 的技术会议。</li>
+<li>开发者对 nodejs 的使用频率成大幅上升。</li>
+<li>各大公司对 nodejs 的投入力度加大。</li>
+<li>了解到国外业界牛人对 web 及 nodejs 开发的理解，及踩过的坑。</li>
+</ol>
+<h2 id="下面主要分享一下个人感兴趣的几个主题。"><a href="#下面主要分享一下个人感兴趣的几个主题。" class="headerlink" title="下面主要分享一下个人感兴趣的几个主题。"></a>下面主要分享一下个人感兴趣的几个主题。</h2><h3 id="百度-云-端一体化框架-Clouda"><a href="#百度-云-端一体化框架-Clouda" class="headerlink" title="百度 云/端一体化框架 Clouda"></a>百度 云/端一体化框架 Clouda</h3><p>客户端/服务器端通过 Clouda 框架实现数据模型打通。即一个 Model 前后通用。再也不用担心我做把数据序列化，然后在后端反序列化这样重复的苦力活了。同时 subpub 机制也实现了云、端数据的准实时同步。后端的变化可以准实时地反应到前端呈现。MVVM 实现了视图和数据模型的双向绑定。而 Clouda 实现了客户端和服务端数据的双向绑定。</p>
+<h3 id="阿里-多浏览器前端测试服务-totorojs"><a href="#阿里-多浏览器前端测试服务-totorojs" class="headerlink" title="阿里 多浏览器前端测试服务 totorojs"></a>阿里 多浏览器前端测试服务 totorojs</h3><p>一套基于网络的多浏览器管理服务，实现一键运行，多浏览器同时测试，汇总生成报表的功能。由于基于网络，IE6/7/8/9/10/11 等，甚至包括手机端，都可以在自己的机器、自己的系统下运行，最后由该服务统一管理和调度。</p>
+<h3 id="网易-实时游戏框架-pomelo"><a href="#网易-实时游戏框架-pomelo" class="headerlink" title="网易 实时游戏框架 pomelo"></a>网易 实时游戏框架 pomelo</h3><p>基于 Node.js 的高性能、分布式游戏服务器框架。包括基础的开发框架和相关的扩展组件（库和工具包），可以帮助你省去游戏开发枯燥中的重复劳动和底层逻辑的开发。Pomelo 不但适用于游戏服务器开发， 也可用于开发高实时 Web 应用，它的分布式架构可以使 Pomelo 比普通的实时 Web 框架扩展性更好。</p>
+<h3 id="Firefox-OS"><a href="#Firefox-OS" class="headerlink" title="Firefox OS"></a>Firefox OS</h3><p>WEB APP API 提供强大的本地操作能力。以Gecko浏览器引擎为核心，采用HTML5来开发。所有应用都基于网络，希望用户一开机就能够连接上互联网，但也可通过HTML5 cache Manifest或相关API在脱机时使用</p>
+<h3 id="Google-AngularJS"><a href="#Google-AngularJS" class="headerlink" title="Google AngularJS"></a>Google AngularJS</h3><p>这是这次北京之行的意外收获，AngularJS 号称是下一代 web 应用的开发框架，在会议中也有不少讲师提到这个框架，现场也有出售关于这个框架的书籍。不过可惜，现场没有买到，在第一天上午就卖完了。后来经过多方了解，这个框架确实有其内在的美，值得大家参考学习。</p>
+<h3 id="V8-性能解决方案"><a href="#V8-性能解决方案" class="headerlink" title="V8 性能解决方案"></a>V8 性能解决方案</h3><p>这是我个人最最感兴趣的一个会议主题，演讲者为 Opera 的 Sphinx 团队的核心成员，虽然演讲能力不是有待提高，但其谈到的内容，确实改变了我对 JS 优化的思考角度。下面将结合我自己的理解，剖析一下关于JS在V8上的优化策略。</p>
+<p><strong>1.隐藏类</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.x = x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">"time1"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; ++i) &#123;</span><br><span class="line">	<span class="keyword">var</span> obj = <span class="keyword">new</span> test(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">"time1"</span>);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test1</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>[x] = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">"time2"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; ++i) &#123;</span><br><span class="line">	<span class="keyword">var</span> obj = <span class="keyword">new</span> test1(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">"time2"</span>);</span><br></pre></td></tr></table></figure>
+<p> 以上2段代码之所以在速度上有天壤之别，其原因就在于V8的属性快速查找方式–隐藏类机制所导致的。每当有对象在 V8 上创建时，V8 会为该对象动态生成隐藏类，每当有新属性添加到该对象时隐藏类会对应改变，隐藏类可重用。</p>
+<p>当 new Point(x, y) 执行的时候，一个新的 Point 对象会被创建出来。如果这是 Point对象第一次被创建，V8 会为它初始化一个隐藏类，不妨称作 C0。因为这个对象还没有定义任何属性，所以这个初始类是一个空类。到这个时候为止，对象 Point 的隐藏类是 C0。</p>
+<p>执行函数 Point 中的第一条语句（this.x = x;）会为对象 Point 创建一个新的属性x。此时，V8 会：<br>在 C0 的基础上创建另一个隐藏类 C1，并将属性 x 的信息添加到 C1 中：这个属性的值会被存储在距 Point 对象的偏移量为 0 的地方。<br>在 C0 中添加适当的类转移信息，使得当有另外的以其为隐藏类的对象在添加了属性 x之后能够找到 C1 作为新的隐藏类。此时对象 Point 的隐藏类被更新为 C1。</p>
+<p><strong>优化策略：</strong><br>        1.在构造函数中初始化所有属性<br>        2.始终按照同样顺序初始化属性<br>        3.不要加载未初始化或已删除的元素</p>
+<p><strong>2.内联缓存，JIT 编译</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123; </span><br><span class="line">   <span class="keyword">return</span> x + y; </span><br><span class="line">&#125; </span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">"time1"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">90000000</span>; ++i) &#123;</span><br><span class="line">    add(<span class="string">'a'</span>,<span class="string">'b'</span>);</span><br><span class="line">    add(<span class="number">1</span>, <span class="number">2</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">"time1"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add1</span>(<span class="params">x, y</span>) </span>&#123; </span><br><span class="line">   <span class="keyword">return</span> x + y; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">"time2"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">90000000</span>; ++i) &#123;</span><br><span class="line">	add1(<span class="string">'a'</span>, <span class="string">'b'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">90000000</span>; ++i) &#123;</span><br><span class="line">	add1(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">"time2"</span>);</span><br></pre></td></tr></table></figure>
+<p>JIT 编译（Just-in-time Compile）</p>
+<pre><code>   传统编译流程：
+       代码段 -&gt; 语法树 -&gt; 中间码 -&gt; 机器语言
+
+   v8编译流程：
+       代码段 -&gt; 语法树 -&gt; 机器语言
+
+   没有解释器，属性访问通过内联缓存代码完成。
+
+内联缓存（Inline Cache）
+
+在第一次执行到访问某个对象的属性的代码时，V8 会找出对象当前的隐藏类。同时，V8 会假设在相同代码段里的其他所有对象的属性访问都由这个隐藏类进行描述，并修改相应的内联代码让他们直接使用这个隐藏类。当 V8 预测正确的时候，属性值的存取仅需一条指令即可完成。如果预测失败了，V8 会再次修改内联代码并移除刚才加入的内联优化。
+
+ 实例代码中，例子一命中 0 次，例子二命中失败 2 次。
+</code></pre><p><strong>优化策略：</strong><br>        1.不要使函数体过大<br>        2.使方法职能单一，即确保属性变量只使用相同隐藏类包含的对象</p>
+<p><strong>3.数组模式（字典模式/快速模式）</strong></p>
+<p>快速模式：对应C语言的数组，速度快，紧凑<br>字典模式：对应C语言的哈希表，速度慢，松散</p>
+<p>1.如果数组索引从 0 到 length-1，且无空洞，进入快速模式。<br>2.当预分配数组大于等于 100000，且数组有空洞，进入字典模式。<br>3.当预分配数组小于 100000，无论有无空洞，数组进入快速模式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">100000</span>); </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'time1'</span>); </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; ++i) &#123;</span><br><span class="line">	t.push(<span class="number">1</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'time1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> t = []; </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">'time2'</span>); </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; ++i) &#123;</span><br><span class="line">	t.push(<span class="number">1</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'time2'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">99999</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">"time1"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">99999</span>; ++i) &#123;</span><br><span class="line">	t.push(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">"time1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">99999</span> + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">"time2"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">99999</span>; ++i) &#123;</span><br><span class="line">	t.push(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">"time2"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>优化策略：</strong><br>         1.从0开始连续的初始化数组，以避免数组进入字典模式<br>         2.不要预分配一个超大数组（比如长度大于等于 100000）<br>         3.不要删除数组中的元素，尤其是数字数组。同样会转换为字典模式<br>         4.不要访问未初始化或已删除的数组元素</p>
+<h3 id="偶遇疯狂猜图CTO："><a href="#偶遇疯狂猜图CTO：" class="headerlink" title="偶遇疯狂猜图CTO："></a>偶遇疯狂猜图CTO：</h3><p>第一天的午饭是一个偶然的机会，和《疯狂猜图》的 CTO 一起吃了顿午饭，交流了一下一些游戏相关的开发心得，感觉在中国游戏的成功并不在于技术有多牛，更多的是想法有多特别，其实在IT的世界，技术从是天外有天，我们要抓紧的往往是当下这一刻的想法，哪怕仅仅是一个闪念。</p>
+<h3 id="BYVoid："><a href="#BYVoid：" class="headerlink" title="BYVoid："></a>BYVoid：</h3><p> 出发到北京的前几天，正好关注到清华牛人郭家宝（BYVoid），这次《京JS》会议偶然发现了他也在现场有点惊讶，这里就带过一下了，哈！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/22/v8-上的-JS-性能优化/" data-id="ciky3fek80004ioa0x2b5lobm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PSD解析工具 “Psdium-Views” 制作规划
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/02/22/前后端分离实践/">前后端分离实践</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/表单设计浅析/">表单设计浅析</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/前端-UI-分离方案/">《杭JS》会议 &amp; 前端 UI 分离方案</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/cocos2d-js-制作-2048/">cocos2d-js 制作 2048</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/">PSD解析工具 “Psdium-Views” 制作规划</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
