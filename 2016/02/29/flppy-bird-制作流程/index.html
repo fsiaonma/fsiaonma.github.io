@@ -57,16 +57,43 @@
 
 
 
-<meta name="description" content="简介：我们做前端游戏研发，很多时候可能与美术之前有较多的配合。正常情况下，美术负责画图，研发负责逻辑。但往往在这个过程中，有部分工作总会重复。在某些情况下，美术需要兼顾程序的整个场景，需要从研发的角度考虑切片，继而花费一部分时间去完成切图工作，继而提供具体资源图片的位置坐标，有需要时还需要提供文字属性对照表。同样，在很多情况下，对于研发来说，拿到的并不是一个视图层，而是一张张资源图片以及一张张效果">
+<meta name="description" content="如题， 我们需要制作一款 flppy bird 游戏，就是曾经在微信疯传了一周的小鸟跳水管略心游戏。无疑问，可以选用 cocos2d 制作，但由于是页面游戏，避免影响加载过大，我选用了 lite 版本。ok，我们开始制作，首先我们需要把整个过程拆分为几步。
+
+找到资源图片
+编写重力系统
+编写障碍物出场顺序以及移动逻辑
+小鸟与障碍物的碰撞检测
+算分
+结算条件，以及重新开始
+
+找资源这个经过在网上简单">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PSD解析工具 “Psdium-Views” 制作规划">
-<meta property="og:url" content="http://yoursite.com/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/index.html">
+<meta property="og:title" content="flppy bird 制作流程">
+<meta property="og:url" content="http://yoursite.com/2016/02/29/flppy-bird-制作流程/index.html">
 <meta property="og:site_name" content="Fsiaonma's Blog">
-<meta property="og:description" content="简介：我们做前端游戏研发，很多时候可能与美术之前有较多的配合。正常情况下，美术负责画图，研发负责逻辑。但往往在这个过程中，有部分工作总会重复。在某些情况下，美术需要兼顾程序的整个场景，需要从研发的角度考虑切片，继而花费一部分时间去完成切图工作，继而提供具体资源图片的位置坐标，有需要时还需要提供文字属性对照表。同样，在很多情况下，对于研发来说，拿到的并不是一个视图层，而是一张张资源图片以及一张张效果">
-<meta property="og:updated_time" content="2016-02-22T14:40:55.582Z">
+<meta property="og:description" content="如题， 我们需要制作一款 flppy bird 游戏，就是曾经在微信疯传了一周的小鸟跳水管略心游戏。无疑问，可以选用 cocos2d 制作，但由于是页面游戏，避免影响加载过大，我选用了 lite 版本。ok，我们开始制作，首先我们需要把整个过程拆分为几步。
+
+找到资源图片
+编写重力系统
+编写障碍物出场顺序以及移动逻辑
+小鸟与障碍物的碰撞检测
+算分
+结算条件，以及重新开始
+
+找资源这个经过在网上简单">
+<meta property="og:updated_time" content="2016-02-29T18:00:35.562Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PSD解析工具 “Psdium-Views” 制作规划">
-<meta name="twitter:description" content="简介：我们做前端游戏研发，很多时候可能与美术之前有较多的配合。正常情况下，美术负责画图，研发负责逻辑。但往往在这个过程中，有部分工作总会重复。在某些情况下，美术需要兼顾程序的整个场景，需要从研发的角度考虑切片，继而花费一部分时间去完成切图工作，继而提供具体资源图片的位置坐标，有需要时还需要提供文字属性对照表。同样，在很多情况下，对于研发来说，拿到的并不是一个视图层，而是一张张资源图片以及一张张效果">
+<meta name="twitter:title" content="flppy bird 制作流程">
+<meta name="twitter:description" content="如题， 我们需要制作一款 flppy bird 游戏，就是曾经在微信疯传了一周的小鸟跳水管略心游戏。无疑问，可以选用 cocos2d 制作，但由于是页面游戏，避免影响加载过大，我选用了 lite 版本。ok，我们开始制作，首先我们需要把整个过程拆分为几步。
+
+找到资源图片
+编写重力系统
+编写障碍物出场顺序以及移动逻辑
+小鸟与障碍物的碰撞检测
+算分
+结算条件，以及重新开始
+
+找资源这个经过在网上简单">
 
 
 
@@ -84,7 +111,7 @@
   };
 </script>
 
-  <title> PSD解析工具 “Psdium-Views” 制作规划 | Fsiaonma's Blog </title>
+  <title> flppy bird 制作流程 | Fsiaonma's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -204,7 +231,7 @@
             
             
               
-                PSD解析工具 “Psdium-Views” 制作规划
+                flppy bird 制作流程
               
             
           </h1>
@@ -216,8 +243,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-22T22:40:47+08:00" content="2016-02-22">
-              2016-02-22
+            <time itemprop="dateCreated" datetime="2016-02-29T23:31:25+08:00" content="2016-02-29">
+              2016-02-29
             </time>
           </span>
 
@@ -227,8 +254,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/" itemprop="commentsCount"></span>
+                <a href="/2016/02/29/flppy-bird-制作流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/29/flppy-bird-制作流程/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -249,14 +276,22 @@
       
 
       
-        <h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h2><p>我们做前端游戏研发，很多时候可能与美术之前有较多的配合。正常情况下，美术负责画图，研发负责逻辑。但往往在这个过程中，有部分工作总会重复。<br>在某些情况下，美术需要兼顾程序的整个场景，需要从研发的角度考虑切片，继而花费一部分时间去完成切图工作，继而提供具体资源图片的位置坐标，有需要时还需要提供文字属性对照表。<br>同样，在很多情况下，对于研发来说，拿到的并不是一个视图层，而是一张张资源图片以及一张张效果图，研发对照效果图，利用资源图片拼凑出一个又一个的场景。</p>
-<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>这样问题就浮现出来了，既然美术已经设计出一个场景，为何研发不能直接使用，而是美术要先把该场景拆分，研发再拼凑呢？这样的步骤明显是非常的多余的，这样有2大缺点：</p>
-<p>1.分工变得不明确，美术做了一部分研发工作，研发做了一部分美术工作。<br>2.基于第一点，会严重降低项目开发效率，因为这部分的工作是完全重复，没必要的。</p>
-<h3 id="当期流程："><a href="#当期流程：" class="headerlink" title="当期流程："></a>当期流程：</h3><p>   美术组建游戏场景（Psd文件）==&gt; 美术拆分场景（切图）==&gt; 研发根据切图组建视图层场景 ==》 研发开发游戏逻辑。</p>
-<h3 id="优化后流程："><a href="#优化后流程：" class="headerlink" title="优化后流程："></a>优化后流程：</h3><p>   美术组建游戏场景（Psd文件）==》 通过工具生成视图层场景 ==》 研发开发游戏逻辑。</p>
-<h3 id="Psdium-Views-研发前准备："><a href="#Psdium-Views-研发前准备：" class="headerlink" title="Psdium-Views 研发前准备："></a>Psdium-Views 研发前准备：</h3><p>由于需要解析 Psd 文件，可利用 ExtendScript 语言，遍历 Psd 文件各个图层，获取相关信息，进而生成相对应的游戏视图层文件。<br>由于脚本是完全的脚本语言，所以需要一项目管理工具，这里使用了我个人开发的《N-Builder》 进行项目管理。</p>
-<h3 id="研发计划："><a href="#研发计划：" class="headerlink" title="研发计划："></a>研发计划：</h3><p>开发主要解决2大问题：<br>1.psd 图片如何生成到 png 或 jpg 图，并且能被程序所识别。<br>2.命名，程序的本质是通过判断 psd 的图层或元件命名来判断该组件的类型的。如何才能让命名变得方便，易懂，是最关键的一步。</p>
-<p>项目地址：<a href="https://github.com/fsiaonma/Psdium-Views/" target="_blank" rel="external">https://github.com/fsiaonma/Psdium-Views/</a> </p>
+        <p>如题， 我们需要制作一款 flppy bird 游戏，就是曾经在微信疯传了一周的小鸟跳水管略心游戏。<br>无疑问，可以选用 cocos2d 制作，但由于是页面游戏，避免影响加载过大，我选用了 lite 版本。<br>ok，我们开始制作，首先我们需要把整个过程拆分为几步。</p>
+<ol>
+<li>找到资源图片</li>
+<li>编写重力系统</li>
+<li>编写障碍物出场顺序以及移动逻辑</li>
+<li>小鸟与障碍物的碰撞检测</li>
+<li>算分</li>
+<li>结算条件，以及重新开始</li>
+</ol>
+<h3 id="找资源"><a href="#找资源" class="headerlink" title="找资源"></a>找资源</h3><p>这个经过在网上简单搜索(<a href="http://pan.baidu.com/s/1pJ3CEYB" target="_blank" rel="external">http://pan.baidu.com/s/1pJ3CEYB</a>) 在这里可以拿到进本上所有图片资源。</p>
+<h3 id="重力系统逻辑"><a href="#重力系统逻辑" class="headerlink" title="重力系统逻辑"></a>重力系统逻辑</h3><p>小鸟只在 y 轴移动，并不产生 x 轴位移，根据重力公式 v = v0 + at 依据重力加速度，不断计算出小鸟<br>在 y 方向上的实时速度即可。（假定上方为正方向，速度为可正可负，加速度为负。）点击屏幕一下，提供<br>小鸟一个往上的较大速度，即可实现跳跃效果。</p>
+<h3 id="障碍物的产生"><a href="#障碍物的产生" class="headerlink" title="障碍物的产生"></a>障碍物的产生</h3><p>障碍物高度为320，场景高度为600，只需要计算好上面柱子的取值范围，用上面的柱子位置减去一半高度，<br>再减去空余位置再减一半高度，就可以得出下面柱子的y坐标。（底部柱子y坐标 = 上面柱子y坐标 - 一半高度 - 空余位置 - 一半高度）。当障碍物中产收，平移到最左边，然后移除到场景外即可。</p>
+<h3 id="碰撞逻辑"><a href="#碰撞逻辑" class="headerlink" title="碰撞逻辑"></a>碰撞逻辑</h3><p>判断小鸟的正切矩形，与所有所有柱子的正切矩形是否有交集即可。</p>
+<h3 id="算分"><a href="#算分" class="headerlink" title="算分"></a>算分</h3><p>当柱子的 x 坐标小于小鸟的 x 坐标，分数 +1。</p>
+<h3 id="计算条件"><a href="#计算条件" class="headerlink" title="计算条件"></a>计算条件</h3><p>当小鸟碰撞，或小鸟的 y 坐标小于0，结算，重新开始。</p>
+<p>到此为止，恭喜你，制作出广告日收入过亿的虐心游戏了。（PS: 不要怀疑名字打错了，是故意打少一个a的，否则就没有山寨的味道了。）</p>
 
       
     </div>
@@ -268,17 +303,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/22/v8-上的-JS-性能优化/" rel="next" title="v8 上的 JS 性能优化">
-                <i class="fa fa-chevron-left"></i> v8 上的 JS 性能优化
+              <a href="/2016/02/22/前后端分离实践/" rel="next" title="前后端分离实践">
+                <i class="fa fa-chevron-left"></i> 前后端分离实践
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/22/cocos2d-js-制作-2048/" rel="prev" title="cocos2d-js 制作 2048">
-                cocos2d-js 制作 2048 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -293,10 +324,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/"
-     data-title="PSD解析工具 “Psdium-Views” 制作规划"
+        <div class="ds-share flat" data-thread-key="2016/02/29/flppy-bird-制作流程/"
+     data-title="flppy bird 制作流程"
      data-content=""
-     data-url="http://yoursite.com/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/">
+     data-url="http://yoursite.com/2016/02/29/flppy-bird-制作流程/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -323,8 +354,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/"
-           data-title="PSD解析工具 “Psdium-Views” 制作规划" data-url="http://yoursite.com/2016/02/22/PSD解析工具-“Psdium-Views”-制作规划/">
+      <div class="ds-thread" data-thread-key="2016/02/29/flppy-bird-制作流程/"
+           data-title="flppy bird 制作流程" data-url="http://yoursite.com/2016/02/29/flppy-bird-制作流程/">
       </div>
     
   </div>
@@ -405,7 +436,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题："><span class="nav-number">1.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当期流程："><span class="nav-number">1.2.</span> <span class="nav-text">当期流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化后流程："><span class="nav-number">1.3.</span> <span class="nav-text">优化后流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Psdium-Views-研发前准备："><span class="nav-number">1.4.</span> <span class="nav-text">Psdium-Views 研发前准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#研发计划："><span class="nav-number">1.5.</span> <span class="nav-text">研发计划：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#找资源"><span class="nav-number">1.</span> <span class="nav-text">找资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重力系统逻辑"><span class="nav-number">2.</span> <span class="nav-text">重力系统逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#障碍物的产生"><span class="nav-number">3.</span> <span class="nav-text">障碍物的产生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#碰撞逻辑"><span class="nav-number">4.</span> <span class="nav-text">碰撞逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算分"><span class="nav-number">5.</span> <span class="nav-text">算分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算条件"><span class="nav-number">6.</span> <span class="nav-text">计算条件</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

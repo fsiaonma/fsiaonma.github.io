@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -72,8 +72,8 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"always"},
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -189,6 +189,112 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/29/flppy-bird-制作流程/" itemprop="url">
+                  flppy bird 制作流程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-29T23:31:25+08:00" content="2016-02-29">
+              2016-02-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/29/flppy-bird-制作流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/29/flppy-bird-制作流程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如题， 我们需要制作一款 flppy bird 游戏，就是曾经在微信疯传了一周的小鸟跳水管略心游戏。<br>无疑问，可以选用 cocos2d 制作，但由于是页面游戏，避免影响加载过大，我选用了 lite 版本。<br>ok，我们开始制作，首先我们需要把整个过程拆分为几步。</p>
+<ol>
+<li>找到资源图片</li>
+<li>编写重力系统</li>
+<li>编写障碍物出场顺序以及移动逻辑</li>
+<li>小鸟与障碍物的碰撞检测</li>
+<li>算分</li>
+<li>结算条件，以及重新开始</li>
+</ol>
+<h3 id="找资源"><a href="#找资源" class="headerlink" title="找资源"></a>找资源</h3><p>这个经过在网上简单搜索(<a href="http://pan.baidu.com/s/1pJ3CEYB" target="_blank" rel="external">http://pan.baidu.com/s/1pJ3CEYB</a>) 在这里可以拿到进本上所有图片资源。</p>
+<h3 id="重力系统逻辑"><a href="#重力系统逻辑" class="headerlink" title="重力系统逻辑"></a>重力系统逻辑</h3><p>小鸟只在 y 轴移动，并不产生 x 轴位移，根据重力公式 v = v0 + at 依据重力加速度，不断计算出小鸟<br>在 y 方向上的实时速度即可。（假定上方为正方向，速度为可正可负，加速度为负。）点击屏幕一下，提供<br>小鸟一个往上的较大速度，即可实现跳跃效果。</p>
+<h3 id="障碍物的产生"><a href="#障碍物的产生" class="headerlink" title="障碍物的产生"></a>障碍物的产生</h3><p>障碍物高度为320，场景高度为600，只需要计算好上面柱子的取值范围，用上面的柱子位置减去一半高度，<br>再减去空余位置再减一半高度，就可以得出下面柱子的y坐标。（底部柱子y坐标 = 上面柱子y坐标 - 一半高度 - 空余位置 - 一半高度）。当障碍物中产收，平移到最左边，然后移除到场景外即可。</p>
+<h3 id="碰撞逻辑"><a href="#碰撞逻辑" class="headerlink" title="碰撞逻辑"></a>碰撞逻辑</h3><p>判断小鸟的正切矩形，与所有所有柱子的正切矩形是否有交集即可。</p>
+<h3 id="算分"><a href="#算分" class="headerlink" title="算分"></a>算分</h3><p>当柱子的 x 坐标小于小鸟的 x 坐标，分数 +1。</p>
+<h3 id="计算条件"><a href="#计算条件" class="headerlink" title="计算条件"></a>计算条件</h3><p>当小鸟碰撞，或小鸟的 y 坐标小于0，结算，重新开始。</p>
+<p>到此为止，恭喜你，制作出广告日收入过亿的虐心游戏了。（PS: 不要怀疑名字打错了，是故意打少一个a的，否则就没有山寨的味道了。）</p>
+
+          
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -948,7 +1054,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1003,7 +1109,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
@@ -1046,6 +1152,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
 
   
 
