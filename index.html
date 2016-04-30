@@ -189,6 +189,15 @@
 
     
     
+      
+      
+        
+        
+        
+      
+
+      
+    
 
     
       
@@ -266,6 +275,293 @@
 <p>《北京遇上西雅图2》提到的《查令十字街84号》，海伦，法兰克通讯20年，二十年的通讯，唯一的相遇机会，却是由法兰克几个月前的去世告终。最有可能，也是唯一一次的见面，没有实现，上一次的通信反而成了永恒。戏剧里的老爷爷，教了老奶奶写4个字(她自己的名字)，老奶奶用到的时候确实在老爷爷已经远远离去的时候。</p>
 <p>会让人恐惧，有一天，某某的微博，朋友圈永远不再更新了，QQ永远不再上线了，甚至不再出现在世界的任何角落。突然就不在了，消失了。让人感到遗憾和伤感，无可奈何。更过不去的，到最后我们并没有来得及好好告别，大喝一杯，打谈一场，就潦草的离散了。引用《少年派的奇幻漂流》里的一句话：All of life is an act of letting go, but what hurts the most is not taking a moment to say goodbye。好好告别，翻译为，好好珍惜更为贴切吧，既然离去突如其来，还是珍惜每一次的相遇吧！所以我们告别的时候还是得用力点，多说一句，也许就是最后一句，多看一眼，弄不好就是最后一眼。</p>
 <p>最后引一段用 约翰·邓恩 的诗歌：<br>All mankind is one volume,<br>When one man dies,<br>one chapter is not torn out of the book,<br>but translated into a better language.<br>And every chapter must be so translated,<br>God employs several translators,<br>Some pieces are translated by age,<br>Some by sickness, some by war, some by justice,<br>But God’s hand shall bind up all our scattered leaves again for that library,<br>Where every book shall lie open to one another.</p>
+
+          
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/05/nodeHttpsServer/" itemprop="url">
+                  nodeHttpsServer
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T16:14:37+08:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/05/nodeHttpsServer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/nodeHttpsServer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="用Node-js创建自签名的HTTPS服务器"><a href="#用Node-js创建自签名的HTTPS服务器" class="headerlink" title="用Node.js创建自签名的HTTPS服务器"></a>用Node.js创建自签名的HTTPS服务器</h1><ol>
+<li>创建自己的CA机构</li>
+<li>创建服务器端证书</li>
+<li>创建客户端证书</li>
+<li>将证书打包</li>
+</ol>
+<h1 id="创建自己的CA机构"><a href="#创建自己的CA机构" class="headerlink" title="创建自己的CA机构"></a>创建自己的CA机构</h1><ul>
+<li>为CA生成私钥</li>
+</ul>
+<blockquote>
+<p>openssl genrsa -out ca-key.pem -des 1024</p>
+</blockquote>
+<ul>
+<li>通过CA私钥生成CSR</li>
+</ul>
+<blockquote>
+<p>openssl req -new -key ca-key.pem -out ca-csr.pem</p>
+</blockquote>
+<ul>
+<li>通过CSR文件和私钥生成CA证书</li>
+</ul>
+<blockquote>
+<p>openssl x509 -req -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem</p>
+</blockquote>
+<h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><blockquote>
+<p>你需要root或者admin的权限<br>Unable to load config info from /user/local/ssl/openssl.cnf<br>对于这个问题，你可以从网上下载一份正确的openssl.cnf文件，<br>然后set OPENSSL_CONF=openssl.cnf文件的本地路径</p>
+</blockquote>
+<h1 id="创建服务器端证书"><a href="#创建服务器端证书" class="headerlink" title="创建服务器端证书"></a>创建服务器端证书</h1><ul>
+<li>为服务器生成私钥</li>
+</ul>
+<blockquote>
+<p>openssl genrsa -out server-key.pem 1024</p>
+</blockquote>
+<ul>
+<li>利用服务器私钥文件服务器生成CSR</li>
+</ul>
+<blockquote>
+<p>openssl req -new -key server-key.pem -config openssl.cnf -out server-csr.pem</p>
+</blockquote>
+<ul>
+<li>这一步非常关键，你需要指定一份openssl.cnf文件。可以用这个</li>
+</ul>
+<blockquote>
+<pre><code>[req]  
+    distinguished_name = req_distinguished_name  
+    req_extensions = v3_req  
+
+[req_distinguished_name]  
+    countryName = Country Name (2 letter code)  
+    countryName_default = CN  
+    stateOrProvinceName = State or Province Name (full name)  
+    stateOrProvinceName_default = BeiJing  
+    localityName = Locality Name (eg, city)  
+    localityName_default = YaYunCun  
+    organizationalUnitName  = Organizational Unit Name (eg, section)  
+    organizationalUnitName_default  = Domain Control Validated  
+    commonName = Internet Widgits Ltd  
+    commonName_max  = 64  
+
+[ v3_req ]  
+    # Extensions to add to a certificate request  
+    basicConstraints = CA:FALSE  
+    keyUsage = nonRepudiation, digitalSignature, keyEncipherment  
+    subjectAltName = @alt_names  
+
+[alt_names]  
+    #注意这个IP.1的设置，IP地址需要和你的服务器的监听地址一样
+    IP.1 = 127.0.0.1
+</code></pre></blockquote>
+<ul>
+<li>通过服务器私钥文件和CSR文件生成服务器证书</li>
+</ul>
+<blockquote>
+<p>openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf</p>
+</blockquote>
+<h1 id="创建客户端证书"><a href="#创建客户端证书" class="headerlink" title="创建客户端证书"></a>创建客户端证书</h1><ul>
+<li>生成客户端私钥</li>
+</ul>
+<blockquote>
+<p>openssl genrsa -out client-key.pem</p>
+</blockquote>
+<ul>
+<li>利用私钥生成CSR</li>
+</ul>
+<blockquote>
+<p>openssl req -new -key client-key.pem -out client-csr.pem</p>
+</blockquote>
+<ul>
+<li>生成客户端证书</li>
+</ul>
+<blockquote>
+<p>openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in client-csr.pem -out client-cert.pem</p>
+</blockquote>
+<h1 id="HTTPS-服务器代码"><a href="#HTTPS-服务器代码" class="headerlink" title="HTTPS 服务器代码"></a>HTTPS 服务器代码</h1><blockquote>
+<pre><code>var https = require(&apos;https&apos;);
+var fs = require(&apos;fs&apos;);
+
+var options = {
+    key: fs.readFileSync(&apos;./keys/server-key.pem&apos;),
+    ca: [fs.readFileSync(&apos;./keys/ca-cert.pem&apos;)],
+    cert: fs.readFileSync(&apos;./keys/server-cert.pem&apos;)
+};
+
+https.createServer(options,function(req,res){
+    res.writeHead(200);
+    res.end(&apos;hello world\n&apos;);
+}).listen(3000,&apos;127.0.0.1&apos;);
+</code></pre></blockquote>
+<h1 id="HTTPS-客户端代码"><a href="#HTTPS-客户端代码" class="headerlink" title="HTTPS 客户端代码"></a>HTTPS 客户端代码</h1><blockquote>
+<pre><code>var https = require(&apos;https&apos;);
+var fs = require(&apos;fs&apos;);
+
+var options = {
+    hostname:&apos;127.0.0.1&apos;,
+    port:3000,
+    path:&apos;/&apos;,
+    method:&apos;GET&apos;,
+    key:fs.readFileSync(&apos;./keys/client-key.pem&apos;),
+    cert:fs.readFileSync(&apos;./keys/client-cert.pem&apos;),
+    ca: [fs.readFileSync(&apos;./keys/ca-cert.pem&apos;)],
+    agent:false
+};
+
+options.agent = new https.Agent(options);
+var req = https.request(options,function(res){
+console.log(&quot;statusCode: &quot;, res.statusCode);
+  console.log(&quot;headers: &quot;, res.headers);
+    res.setEncoding(&apos;utf-8&apos;);
+    res.on(&apos;data&apos;,function(d){
+        console.log(d);
+    })
+});
+req.end();
+
+req.on(&apos;error&apos;,function(e){
+    console.log(e);
+}) 
+</code></pre></blockquote>
+<h1 id="将证书打包"><a href="#将证书打包" class="headerlink" title="将证书打包"></a>将证书打包</h1><ul>
+<li>打包服务器端证书</li>
+</ul>
+<blockquote>
+<p>openssl pkcs12 -export -in server-cert.pem -inkey server-key.pem -certfile ca-cert.pem -out server.pfx</p>
+</blockquote>
+<ul>
+<li>打包客户端证书</li>
+</ul>
+<blockquote>
+<p>openssl pkcs12 -export -in client-cert.pem -inkey client-key.pem -certfile ca-cert.pem -out client.pfx</p>
+</blockquote>
+<h1 id="服务器端代码"><a href="#服务器端代码" class="headerlink" title="服务器端代码"></a>服务器端代码</h1><blockquote>
+<pre><code>var https = require(&apos;https&apos;);
+var fs = require(&apos;fs&apos;);
+
+var options = {
+    pfx:fs.readFileSync(&apos;./keys/server.pfx&apos;),
+    passphrase:&apos;your password&apos;
+};
+
+https.createServer(options,function(req,res){
+    res.writeHead(200);
+    res.end(&apos;hello world\n&apos;);
+}).listen(3000,&apos;127.0.0.1&apos;);
+</code></pre></blockquote>
+<h1 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h1><blockquote>
+<pre><code>var https = require(&apos;https&apos;);
+var fs = require(&apos;fs&apos;);
+
+var options = {
+    hostname:&apos;127.0.0.1&apos;,
+    port:3000,
+    path:&apos;/&apos;,
+    method:&apos;GET&apos;,
+    pfx:fs.readFileSync(&apos;./keys/server.pfx&apos;),
+    passphrase:&apos;your password&apos;,
+    agent:false
+};
+
+options.agent = new https.Agent(options);
+var req = https.request(options,function(res){
+console.log(&quot;statusCode: &quot;, res.statusCode);
+  console.log(&quot;headers: &quot;, res.headers);
+    res.setEncoding(&apos;utf-8&apos;);
+    res.on(&apos;data&apos;,function(d){
+        console.log(d);
+    })
+});
+
+req.end();
+
+req.on(&apos;error&apos;,function(e){
+    console.log(e);
+})
+</code></pre></blockquote>
+<ul>
+<li>(来源 <a href="http://cnodejs.org/topic/54745ac22804a0997d38b32d" target="_blank" rel="external">http://cnodejs.org/topic/54745ac22804a0997d38b32d</a>)</li>
+</ul>
 
           
         
@@ -1149,7 +1445,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
